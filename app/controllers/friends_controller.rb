@@ -14,7 +14,7 @@ class FriendsController < ApplicationController
     friend_ids.uniq!
     render json: {} and return if friend_ids.empty?
     friends = User.where(id: friend_ids).order('id DESC')
-    render json: {friends: friends} and return
+    render json: {friends: friends.map { |friend| {login_id: friend[:login_id], name: friend[:name]} }} and return
   end
 
   def show
@@ -22,6 +22,6 @@ class FriendsController < ApplicationController
     order = "id DESC"
     order = params[:order] if params[:order]
     friends = User.where("name LIKE '%"+params[:id]+"%'").order(order)
-    render json: {friends: friends} and return
+    render json: {friends: friends.map { |friend| {login_id: friend[:login_id], name: friend[:name]} }} and return
   end
 end

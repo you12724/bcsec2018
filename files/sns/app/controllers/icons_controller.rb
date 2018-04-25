@@ -3,7 +3,7 @@ class IconsController < ApplicationController
     file_name = params[:image].original_filename.downcase
     mime_type = params[:image].content_type.downcase
     # 2018/04/06 harupu Fixed file_name check bypass issue
-    if !!file_name.match(/.png|.jpeg|.jpg|.gif$/) and mime_type.start_with? 'image/'
+    if !!file_name.match(/.png$|.jpeg$|.jpg$|.gif$/) and mime_type.start_with? 'image/'
       dest_file_name = "#{SecureRandom.uuid}#{File.extname(file_name)}"
       image_path = "#{Rails.root}/public/icons/#{dest_file_name}"
       FileUtils.mv params[:image].tempfile, image_path
@@ -13,7 +13,8 @@ class IconsController < ApplicationController
         # `convert -resize #{px}x#{px} #{image_path} #{image_path}`
         px.gsub!(/"/, '\"')
         image_path.gsub!(/"/, '\"')
-        `convert -resize "#{px}x#{px}" "#{image_path}" "#{image_path}"`
+        # @bug os command '\"; sleep 10;\"'
+        system 'convert', '-resize', "#{px}x#{px}", "#{image_path}", "#{image_path}"
       end
       render json: {file_name: dest_file_name} and return
     else

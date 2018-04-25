@@ -1,0 +1,605 @@
+D, [2018-04-25T01:34:50.492322 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "feeds"[0m
+D, [2018-04-25T01:34:50.492746 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+D, [2018-04-25T01:34:50.504085 #13068] DEBUG -- :   [1m[35m (11.2ms)[0m  [1m[35mCREATE TABLE "feeds" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feed_type" varchar, "user_id" integer, "image_file_name" varchar, "exif" varchar(1000), "comment" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+D, [2018-04-25T01:34:50.504735 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "friends"[0m
+D, [2018-04-25T01:34:50.510829 #13068] DEBUG -- :   [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "friends" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_user_id" integer, "to_user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+D, [2018-04-25T01:34:50.511441 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "replies"[0m
+D, [2018-04-25T01:34:50.517532 #13068] DEBUG -- :   [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "replies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feed_id" integer, "user_id" integer, "reply" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+D, [2018-04-25T01:34:50.518228 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+D, [2018-04-25T01:34:50.524406 #13068] DEBUG -- :   [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login_id" varchar, "name" varchar, "pass" varchar, "icon_file_name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+D, [2018-04-25T01:34:50.533619 #13068] DEBUG -- :   [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+D, [2018-04-25T01:34:50.541680 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+D, [2018-04-25T01:34:50.546599 #13068] DEBUG -- :   [1m[35m (4.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20180129073555)[0m
+D, [2018-04-25T01:34:50.551195 #13068] DEBUG -- :   [1m[35m (4.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171103073854),
+(20171103073857),
+(20180125073854),
+(20171103073856);
+
+[0m
+D, [2018-04-25T01:34:50.558297 #13068] DEBUG -- :   [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+D, [2018-04-25T01:34:50.559643 #13068] DEBUG -- :   [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+D, [2018-04-25T01:34:50.564096 #13068] DEBUG -- :   [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2018-04-25T01:34:50.565217 #13068] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "production"], ["created_at", "2018-04-25 01:34:50.564426"], ["updated_at", "2018-04-25 01:34:50.564426"]]
+D, [2018-04-25T01:34:50.569688 #13068] DEBUG -- :   [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+D, [2018-04-25T01:34:50.570374 #13068] DEBUG -- :   [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+D, [2018-04-25T01:34:50.571752 #13068] DEBUG -- :   [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+D, [2018-04-25T01:34:50.572290 #13068] DEBUG -- :   [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+D, [2018-04-25T01:34:50.574276 #13068] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+I, [2018-04-25T01:35:07.210531 #13108]  INFO -- : [2675170b-2d3f-46c9-97e6-6864151be567] Started GET "/cable" for 106.154.77.237 at 2018-04-25 01:35:07 +0000
+I, [2018-04-25T01:35:07.231971 #13108]  INFO -- : [2675170b-2d3f-46c9-97e6-6864151be567] Started GET "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:35:07 +0000
+I, [2018-04-25T01:35:07.232097 #13108]  INFO -- : [2675170b-2d3f-46c9-97e6-6864151be567] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:35:07.369652 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:35:07.369967 #13108]  INFO -- : ChatChannel is streaming from notification_channel_2
+I, [2018-04-25T01:35:09.211434 #13106]  INFO -- : [d870790a-e7f6-41f9-9b2f-4c2387e1c0b9] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:35:09 +0000
+I, [2018-04-25T01:35:09.219911 #13108]  INFO -- : [6d3f87f9-5f9e-4681-ad4c-1b14eb99f148] Started GET "/cable" for 1.72.0.105 at 2018-04-25 01:35:09 +0000
+I, [2018-04-25T01:35:09.220383 #13108]  INFO -- : [6d3f87f9-5f9e-4681-ad4c-1b14eb99f148] Started GET "/cable/" [WebSocket] for 1.72.0.105 at 2018-04-25 01:35:09 +0000
+I, [2018-04-25T01:35:09.220478 #13108]  INFO -- : [6d3f87f9-5f9e-4681-ad4c-1b14eb99f148] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:35:09.233909 #13106]  INFO -- : [d870790a-e7f6-41f9-9b2f-4c2387e1c0b9] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:35:09 +0000
+I, [2018-04-25T01:35:09.234027 #13106]  INFO -- : [d870790a-e7f6-41f9-9b2f-4c2387e1c0b9] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:35:09.267923 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:35:09.268153 #13108]  INFO -- : ChatChannel is streaming from notification_channel_4
+I, [2018-04-25T01:35:09.320144 #13106]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:35:09.320491 #13106]  INFO -- : ChatChannel is streaming from notification_channel_5
+I, [2018-04-25T01:35:12.327002 #13106]  INFO -- : [8735ad15-9dd5-446a-9dba-5515e9880b60] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:35:12 +0000
+I, [2018-04-25T01:35:12.327477 #13106]  INFO -- : [8735ad15-9dd5-446a-9dba-5515e9880b60] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:35:12 +0000
+I, [2018-04-25T01:35:12.327548 #13106]  INFO -- : [8735ad15-9dd5-446a-9dba-5515e9880b60] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:35:12.367708 #13106]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:35:12.367926 #13106]  INFO -- : ChatChannel is streaming from notification_channel_3
+I, [2018-04-25T01:35:13.557016 #13108]  INFO -- : Finished "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:35:13 +0000
+I, [2018-04-25T01:35:13.557195 #13108]  INFO -- : ChatChannel stopped streaming from notification_channel_2
+I, [2018-04-25T01:35:13.677982 #13108]  INFO -- : [87eaf00f-06a7-4ade-baf5-434aa4199763] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:35:13 +0000
+I, [2018-04-25T01:35:13.678483 #13106]  INFO -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:35:13 +0000
+I, [2018-04-25T01:35:13.683739 #13106]  INFO -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0] Processing by FeedsController#index as */*
+I, [2018-04-25T01:35:13.687682 #13108]  INFO -- : [87eaf00f-06a7-4ade-baf5-434aa4199763] Processing by FriendsController#index as */*
+I, [2018-04-25T01:35:13.693187 #13106]  INFO -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0] Completed 500 Internal Server Error in 9ms
+F, [2018-04-25T01:35:13.693897 #13106] FATAL -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0]   
+F, [2018-04-25T01:35:13.693970 #13106] FATAL -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:35:13.694007 #13106] FATAL -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0]   
+F, [2018-04-25T01:35:13.694045 #13106] FATAL -- : [d82a015b-a921-4dfb-a25c-cf5565a109b0] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:35:13.696762 #13108]  INFO -- : [87eaf00f-06a7-4ade-baf5-434aa4199763] Completed 500 Internal Server Error in 9ms
+F, [2018-04-25T01:35:13.697432 #13108] FATAL -- : [87eaf00f-06a7-4ade-baf5-434aa4199763]   
+F, [2018-04-25T01:35:13.697486 #13108] FATAL -- : [87eaf00f-06a7-4ade-baf5-434aa4199763] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:35:13.697524 #13108] FATAL -- : [87eaf00f-06a7-4ade-baf5-434aa4199763]   
+F, [2018-04-25T01:35:13.697563 #13108] FATAL -- : [87eaf00f-06a7-4ade-baf5-434aa4199763] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:35:13.698369 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363] Started GET "/users/2/icon" for 127.0.0.1 at 2018-04-25 01:35:13 +0000
+I, [2018-04-25T01:35:13.699398 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:35:13.699464 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363]   Parameters: {"id"=>"2"}
+D, [2018-04-25T01:35:13.708728 #13108] DEBUG -- : [48cfec80-776c-4d73-9202-7ff83c9c5363]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+I, [2018-04-25T01:35:13.710405 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363]   Rendering text template
+I, [2018-04-25T01:35:13.710512 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363]   Rendered text template (0.0ms)
+I, [2018-04-25T01:35:13.710666 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363] Sent data  (1.0ms)
+I, [2018-04-25T01:35:13.710785 #13108]  INFO -- : [48cfec80-776c-4d73-9202-7ff83c9c5363] Completed 200 OK in 11ms (Views: 0.7ms | ActiveRecord: 1.4ms)
+I, [2018-04-25T01:35:13.827159 #13106]  INFO -- : [795e211e-8d60-4568-a9da-316f395b74e6] Started GET "/cable" for 106.154.77.237 at 2018-04-25 01:35:13 +0000
+I, [2018-04-25T01:35:13.827678 #13106]  INFO -- : [795e211e-8d60-4568-a9da-316f395b74e6] Started GET "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:35:13 +0000
+I, [2018-04-25T01:35:13.827749 #13106]  INFO -- : [795e211e-8d60-4568-a9da-316f395b74e6] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:35:13.927460 #13106]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:35:13.927785 #13106]  INFO -- : ChatChannel is streaming from notification_channel_2
+I, [2018-04-25T01:35:30.811718 #13106]  INFO -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da] Started POST "/users" for 127.0.0.1 at 2018-04-25 01:35:30 +0000
+I, [2018-04-25T01:35:30.817767 #13106]  INFO -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da] Processing by UsersController#create as */*
+I, [2018-04-25T01:35:30.817827 #13106]  INFO -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da]   Parameters: {"login_id"=>"", "name"=>"", "pass"=>"", "icon_file_name"=>""}
+D, [2018-04-25T01:35:30.829684 #13106] DEBUG -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da]   [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+D, [2018-04-25T01:35:30.843205 #13106] DEBUG -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da]   [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."login_id" = ? LIMIT ?[0m  [["login_id", ""], ["LIMIT", 1]]
+D, [2018-04-25T01:35:30.844520 #13106] DEBUG -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da]   [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+I, [2018-04-25T01:35:30.845886 #13106]  INFO -- : [f4a28ce3-e3d4-43f0-9742-54cf73bc19da] Completed 400 Bad Request in 28ms (Views: 0.4ms | ActiveRecord: 1.6ms)
+I, [2018-04-25T01:35:36.979408 #13108]  INFO -- : [8961340a-4c38-4b3e-ad96-679fc9488e47] Started POST "/feeds" for 127.0.0.1 at 2018-04-25 01:35:36 +0000
+I, [2018-04-25T01:35:36.985252 #13108]  INFO -- : [8961340a-4c38-4b3e-ad96-679fc9488e47] Processing by FeedsController#create as */*
+I, [2018-04-25T01:35:36.985313 #13108]  INFO -- : [8961340a-4c38-4b3e-ad96-679fc9488e47]   Parameters: {"comment"=>"';<script>alert(\"hoge\");</script>", "feed_type"=>"text"}
+I, [2018-04-25T01:35:36.989547 #13108]  INFO -- : [8961340a-4c38-4b3e-ad96-679fc9488e47] Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:35:36.990117 #13108] FATAL -- : [8961340a-4c38-4b3e-ad96-679fc9488e47]   
+F, [2018-04-25T01:35:36.990212 #13108] FATAL -- : [8961340a-4c38-4b3e-ad96-679fc9488e47] ActionView::MissingTemplate (Missing template feeds/create, application/create with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:35:36.990269 #13108] FATAL -- : [8961340a-4c38-4b3e-ad96-679fc9488e47]   
+F, [2018-04-25T01:35:36.990308 #13108] FATAL -- : [8961340a-4c38-4b3e-ad96-679fc9488e47] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:35:37.178243 #13106]  INFO -- : [96b54569-8d3a-40be-a394-318481e2ea8a] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:35:37 +0000
+I, [2018-04-25T01:35:37.178918 #13106]  INFO -- : [96b54569-8d3a-40be-a394-318481e2ea8a] Processing by FeedsController#index as */*
+I, [2018-04-25T01:35:37.179809 #13106]  INFO -- : [96b54569-8d3a-40be-a394-318481e2ea8a] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:35:37.180382 #13106] FATAL -- : [96b54569-8d3a-40be-a394-318481e2ea8a]   
+F, [2018-04-25T01:35:37.180432 #13106] FATAL -- : [96b54569-8d3a-40be-a394-318481e2ea8a] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:35:37.180470 #13106] FATAL -- : [96b54569-8d3a-40be-a394-318481e2ea8a]   
+F, [2018-04-25T01:35:37.180506 #13106] FATAL -- : [96b54569-8d3a-40be-a394-318481e2ea8a] app/controllers/application_controller.rb:42:in `authenticate_user!'
+E, [2018-04-25T01:35:40.987670 #13108] ERROR -- : WebSocket error occurred: Broken pipe
+I, [2018-04-25T01:35:40.988065 #13108]  INFO -- : Finished "/cable/" [WebSocket] for 1.72.0.105 at 2018-04-25 01:35:40 +0000
+I, [2018-04-25T01:35:40.988158 #13108]  INFO -- : ChatChannel stopped streaming from notification_channel_4
+I, [2018-04-25T01:35:41.197117 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78] Started GET "/users/4/icon" for 127.0.0.1 at 2018-04-25 01:35:41 +0000
+I, [2018-04-25T01:35:41.197861 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:35:41.197917 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78]   Parameters: {"id"=>"4"}
+D, [2018-04-25T01:35:41.198880 #13108] DEBUG -- : [d904da80-e814-468b-9f29-b4d8a497de78]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+I, [2018-04-25T01:35:41.200135 #13106]  INFO -- : [430159da-0959-466d-8b4f-4518750d4587] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:35:41 +0000
+I, [2018-04-25T01:35:41.201207 #13106]  INFO -- : [430159da-0959-466d-8b4f-4518750d4587] Processing by FriendsController#index as */*
+I, [2018-04-25T01:35:41.203882 #13106]  INFO -- : [430159da-0959-466d-8b4f-4518750d4587] Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:35:41.204453 #13106] FATAL -- : [430159da-0959-466d-8b4f-4518750d4587]   
+F, [2018-04-25T01:35:41.204500 #13106] FATAL -- : [430159da-0959-466d-8b4f-4518750d4587] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:35:41.204538 #13106] FATAL -- : [430159da-0959-466d-8b4f-4518750d4587]   
+F, [2018-04-25T01:35:41.204575 #13106] FATAL -- : [430159da-0959-466d-8b4f-4518750d4587] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:35:41.205111 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78]   Rendering text template
+I, [2018-04-25T01:35:41.205204 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78]   Rendered text template (0.0ms)
+I, [2018-04-25T01:35:41.205308 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78] Sent data  (6.2ms)
+I, [2018-04-25T01:35:41.205428 #13108]  INFO -- : [d904da80-e814-468b-9f29-b4d8a497de78] Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:35:41.206590 #13108]  INFO -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:35:41 +0000
+I, [2018-04-25T01:35:41.207046 #13108]  INFO -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b] Processing by FeedsController#index as */*
+I, [2018-04-25T01:35:41.209355 #13108]  INFO -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b] Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:35:41.209953 #13108] FATAL -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b]   
+F, [2018-04-25T01:35:41.209999 #13108] FATAL -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:35:41.210039 #13108] FATAL -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b]   
+F, [2018-04-25T01:35:41.210076 #13108] FATAL -- : [f9143a45-8612-42f6-b58a-cdfc73e7c41b] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:35:41.239850 #13106]  INFO -- : [f36e32a6-04a4-4e45-ad39-801e09e0f24d] Started GET "/cable" for 1.72.0.105 at 2018-04-25 01:35:41 +0000
+I, [2018-04-25T01:35:41.240247 #13106]  INFO -- : [f36e32a6-04a4-4e45-ad39-801e09e0f24d] Started GET "/cable/" [WebSocket] for 1.72.0.105 at 2018-04-25 01:35:41 +0000
+I, [2018-04-25T01:35:41.240313 #13106]  INFO -- : [f36e32a6-04a4-4e45-ad39-801e09e0f24d] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:35:41.355666 #13106]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:35:41.355892 #13106]  INFO -- : ChatChannel is streaming from notification_channel_4
+I, [2018-04-25T01:36:06.827407 #13106]  INFO -- : Finished "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:36:06 +0000
+I, [2018-04-25T01:36:06.827591 #13106]  INFO -- : ChatChannel stopped streaming from notification_channel_2
+I, [2018-04-25T01:36:07.647259 #13108]  INFO -- : [0ee8aad9-f9c2-4628-91de-0f6a20e07b02] Started GET "/cable" for 106.154.77.237 at 2018-04-25 01:36:07 +0000
+I, [2018-04-25T01:36:07.647713 #13108]  INFO -- : [0ee8aad9-f9c2-4628-91de-0f6a20e07b02] Started GET "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:36:07 +0000
+I, [2018-04-25T01:36:07.647788 #13108]  INFO -- : [0ee8aad9-f9c2-4628-91de-0f6a20e07b02] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:36:07.745918 #13106]  INFO -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e] Started POST "/feeds" for 127.0.0.1 at 2018-04-25 01:36:07 +0000
+I, [2018-04-25T01:36:07.761992 #13106]  INFO -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e] Processing by FeedsController#create as */*
+I, [2018-04-25T01:36:07.762108 #13106]  INFO -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e]   Parameters: {"image"=>#<ActionDispatch::Http::UploadedFile:0x000000000561d6b8 @tempfile=#<Tempfile:/tmp/RackMultipart20180425-13106-1ve6pyh.png>, @original_filename="runa_0116_02-1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"image\"; filename=\"runa_0116_02-1.png\"\r\nContent-Type: image/png\r\n">, "feed_type"=>"image"}
+I, [2018-04-25T01:36:07.766340 #13106]  INFO -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e] Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:36:07.766978 #13106] FATAL -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e]   
+F, [2018-04-25T01:36:07.767029 #13106] FATAL -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e] ActionView::MissingTemplate (Missing template feeds/create, application/create with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:36:07.767067 #13106] FATAL -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e]   
+F, [2018-04-25T01:36:07.767106 #13106] FATAL -- : [948542ea-bbfb-4690-bfd7-f41a91cd6f6e] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:36:07.787280 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:36:07.787545 #13108]  INFO -- : ChatChannel is streaming from notification_channel_2
+I, [2018-04-25T01:36:40.888068 #13108]  INFO -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f] Started GET "/feeds/8/find_new" for 127.0.0.1 at 2018-04-25 01:36:40 +0000
+I, [2018-04-25T01:36:40.888834 #13108]  INFO -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f] Processing by FeedsController#find_new as */*
+I, [2018-04-25T01:36:40.888894 #13108]  INFO -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f]   Parameters: {"id"=>"8"}
+I, [2018-04-25T01:36:40.892938 #13108]  INFO -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f] Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:36:40.893508 #13108] FATAL -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f]   
+F, [2018-04-25T01:36:40.893554 #13108] FATAL -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f] ActionView::MissingTemplate (Missing template feeds/find_new, application/find_new with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:36:40.893597 #13108] FATAL -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f]   
+F, [2018-04-25T01:36:40.893636 #13108] FATAL -- : [a6fe45b0-d604-44d6-b4ed-b67c3a112a0f] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:36:51.395898 #13106]  INFO -- : Finished "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:36:51 +0000
+I, [2018-04-25T01:36:51.396026 #13106]  INFO -- : ChatChannel stopped streaming from notification_channel_5
+I, [2018-04-25T01:36:51.396929 #13108]  INFO -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:36:51 +0000
+I, [2018-04-25T01:36:51.397523 #13108]  INFO -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed] Processing by FeedsController#index as */*
+I, [2018-04-25T01:36:51.398427 #13108]  INFO -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:36:51.399010 #13108] FATAL -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed]   
+F, [2018-04-25T01:36:51.399057 #13108] FATAL -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:36:51.399096 #13108] FATAL -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed]   
+F, [2018-04-25T01:36:51.399134 #13108] FATAL -- : [3117742e-17d4-4396-9dd2-28c2db03a3ed] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:36:51.555674 #13106]  INFO -- : [e5c5606c-7536-4f50-9c68-e698288e3152] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:36:51 +0000
+I, [2018-04-25T01:36:51.556054 #13106]  INFO -- : [e5c5606c-7536-4f50-9c68-e698288e3152] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:36:51 +0000
+I, [2018-04-25T01:36:51.556132 #13106]  INFO -- : [e5c5606c-7536-4f50-9c68-e698288e3152] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:36:51.563753 #13106]  INFO -- : [502a5db4-ef29-447a-8999-caf621a4d31c] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:36:51 +0000
+I, [2018-04-25T01:36:51.564226 #13106]  INFO -- : [502a5db4-ef29-447a-8999-caf621a4d31c] Processing by FriendsController#index as */*
+I, [2018-04-25T01:36:51.565071 #13106]  INFO -- : [502a5db4-ef29-447a-8999-caf621a4d31c] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:36:51.565680 #13106] FATAL -- : [502a5db4-ef29-447a-8999-caf621a4d31c]   
+F, [2018-04-25T01:36:51.565728 #13106] FATAL -- : [502a5db4-ef29-447a-8999-caf621a4d31c] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:36:51.565777 #13106] FATAL -- : [502a5db4-ef29-447a-8999-caf621a4d31c]   
+F, [2018-04-25T01:36:51.565812 #13106] FATAL -- : [502a5db4-ef29-447a-8999-caf621a4d31c] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:36:51.571964 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:36:51 +0000
+I, [2018-04-25T01:36:51.572415 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:36:51.572462 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:36:51.573114 #13108] DEBUG -- : [0a8f0510-2377-49b4-b992-fb99862274a9]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:36:51.573626 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9]   Rendering text template
+I, [2018-04-25T01:36:51.573715 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9]   Rendered text template (0.0ms)
+I, [2018-04-25T01:36:51.573820 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9] Sent data  (0.4ms)
+I, [2018-04-25T01:36:51.573927 #13108]  INFO -- : [0a8f0510-2377-49b4-b992-fb99862274a9] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:36:51.605539 #13106]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:36:51.605747 #13106]  INFO -- : ChatChannel is streaming from notification_channel_5
+I, [2018-04-25T01:36:55.777860 #13106]  INFO -- : Finished "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:36:55 +0000
+I, [2018-04-25T01:36:55.778003 #13106]  INFO -- : ChatChannel stopped streaming from notification_channel_5
+I, [2018-04-25T01:36:55.988260 #13108]  INFO -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:36:55 +0000
+I, [2018-04-25T01:36:55.988886 #13108]  INFO -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a] Processing by FriendsController#index as */*
+I, [2018-04-25T01:36:55.989773 #13108]  INFO -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:36:55.990379 #13108] FATAL -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a]   
+F, [2018-04-25T01:36:55.990426 #13108] FATAL -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:36:55.990468 #13108] FATAL -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a]   
+F, [2018-04-25T01:36:55.990514 #13108] FATAL -- : [d5285a1d-b103-40d1-bd0e-b2af11da019a] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:36:55.991700 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:36:55 +0000
+I, [2018-04-25T01:36:55.992397 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:36:55.992452 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:36:55.994893 #13106] DEBUG -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:36:55.995807 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65]   Rendering text template
+I, [2018-04-25T01:36:55.995907 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65]   Rendered text template (0.0ms)
+I, [2018-04-25T01:36:55.996018 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65] Sent data  (0.8ms)
+I, [2018-04-25T01:36:55.996130 #13106]  INFO -- : [400744b9-88b6-4c08-8ec4-6373c6a31f65] Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.2ms)
+I, [2018-04-25T01:36:55.997163 #13108]  INFO -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:36:55 +0000
+I, [2018-04-25T01:36:55.997612 #13108]  INFO -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea] Processing by FeedsController#index as */*
+I, [2018-04-25T01:36:55.998376 #13108]  INFO -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:36:55.998927 #13108] FATAL -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea]   
+F, [2018-04-25T01:36:55.998972 #13108] FATAL -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:36:55.999021 #13108] FATAL -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea]   
+F, [2018-04-25T01:36:55.999060 #13108] FATAL -- : [0af89ddd-cc1c-4a03-98db-e8dc171d74ea] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:36:56.028071 #13108]  INFO -- : [5a5098e3-ded4-4e7c-9e71-ca212ed59542] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:36:56 +0000
+I, [2018-04-25T01:36:56.028461 #13108]  INFO -- : [5a5098e3-ded4-4e7c-9e71-ca212ed59542] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:36:56 +0000
+I, [2018-04-25T01:36:56.028530 #13108]  INFO -- : [5a5098e3-ded4-4e7c-9e71-ca212ed59542] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:36:56.110862 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:36:56.111078 #13108]  INFO -- : ChatChannel is streaming from notification_channel_5
+I, [2018-04-25T01:36:58.807200 #13106]  INFO -- : [c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] Started GET "/css/ext/bootstrap.min.css.map" for 127.0.0.1 at 2018-04-25 01:36:58 +0000
+F, [2018-04-25T01:36:58.808282 #13106] FATAL -- : [c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75]   
+F, [2018-04-25T01:36:58.808336 #13106] FATAL -- : [c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] ActionController::RoutingError (No route matches [GET] "/css/ext/bootstrap.min.css.map"):
+F, [2018-04-25T01:36:58.808372 #13106] FATAL -- : [c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75]   
+F, [2018-04-25T01:36:58.808415 #13106] FATAL -- : [c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] railties (5.1.4) lib/rails/engine.rb:522:in `call'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] unicorn (5.4.0) lib/unicorn/http_server.rb:606:in `process_client'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] unicorn (5.4.0) lib/unicorn/http_server.rb:701:in `worker_loop'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] unicorn (5.4.0) lib/unicorn/http_server.rb:549:in `spawn_missing_workers'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] unicorn (5.4.0) lib/unicorn/http_server.rb:142:in `start'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] unicorn (5.4.0) bin/unicorn_rails:209:in `<top (required)>'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] /usr/local/bin/unicorn_rails:23:in `load'
+[c3a5dc7f-7f0e-4be6-a70a-12c5b1b33e75] /usr/local/bin/unicorn_rails:23:in `<main>'
+I, [2018-04-25T01:37:03.567547 #13106]  INFO -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b] Started POST "/friends" for 127.0.0.1 at 2018-04-25 01:37:03 +0000
+I, [2018-04-25T01:37:03.568486 #13106]  INFO -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b] Processing by FriendsController#create as */*
+I, [2018-04-25T01:37:03.568542 #13106]  INFO -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b]   Parameters: {"login_id"=>"ronya"}
+I, [2018-04-25T01:37:03.571007 #13106]  INFO -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b] Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:03.575656 #13106] FATAL -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b]   
+F, [2018-04-25T01:37:03.575716 #13106] FATAL -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b] ActionView::MissingTemplate (Missing template friends/create, application/create with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:03.575755 #13106] FATAL -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b]   
+F, [2018-04-25T01:37:03.575793 #13106] FATAL -- : [e6038a84-62fd-41a5-bddf-24f29ca4ee7b] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:07.568312 #13106]  INFO -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e] Started GET "/friends/test?order=name+asc" for 127.0.0.1 at 2018-04-25 01:37:07 +0000
+I, [2018-04-25T01:37:07.569100 #13106]  INFO -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e] Processing by FriendsController#show as */*
+I, [2018-04-25T01:37:07.569156 #13106]  INFO -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e]   Parameters: {"order"=>"name asc", "id"=>"test"}
+I, [2018-04-25T01:37:07.573264 #13106]  INFO -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e] Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:07.573892 #13106] FATAL -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e]   
+F, [2018-04-25T01:37:07.573937 #13106] FATAL -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e] ActionView::MissingTemplate (Missing template friends/show, application/show with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:07.573973 #13106] FATAL -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e]   
+F, [2018-04-25T01:37:07.574008 #13106] FATAL -- : [0559cf3f-211f-4054-9ee9-a5ddc9cb913e] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:09.268120 #13106]  INFO -- : [88180216-fd1f-4791-a92d-2b886a752b82] Started GET "/friends/test?order=name+asc" for 127.0.0.1 at 2018-04-25 01:37:09 +0000
+I, [2018-04-25T01:37:09.268843 #13106]  INFO -- : [88180216-fd1f-4791-a92d-2b886a752b82] Processing by FriendsController#show as */*
+I, [2018-04-25T01:37:09.268902 #13106]  INFO -- : [88180216-fd1f-4791-a92d-2b886a752b82]   Parameters: {"order"=>"name asc", "id"=>"test"}
+I, [2018-04-25T01:37:09.269793 #13106]  INFO -- : [88180216-fd1f-4791-a92d-2b886a752b82] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:09.270545 #13106] FATAL -- : [88180216-fd1f-4791-a92d-2b886a752b82]   
+F, [2018-04-25T01:37:09.270592 #13106] FATAL -- : [88180216-fd1f-4791-a92d-2b886a752b82] ActionView::MissingTemplate (Missing template friends/show, application/show with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:09.270628 #13106] FATAL -- : [88180216-fd1f-4791-a92d-2b886a752b82]   
+F, [2018-04-25T01:37:09.270729 #13106] FATAL -- : [88180216-fd1f-4791-a92d-2b886a752b82] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:09.478201 #13108]  INFO -- : [3be8e350-390a-4a2c-86c3-8e768404cc45] Started GET "/friends/test?order=name+asc" for 127.0.0.1 at 2018-04-25 01:37:09 +0000
+I, [2018-04-25T01:37:09.478974 #13108]  INFO -- : [3be8e350-390a-4a2c-86c3-8e768404cc45] Processing by FriendsController#show as */*
+I, [2018-04-25T01:37:09.479034 #13108]  INFO -- : [3be8e350-390a-4a2c-86c3-8e768404cc45]   Parameters: {"order"=>"name asc", "id"=>"test"}
+I, [2018-04-25T01:37:09.483086 #13108]  INFO -- : [3be8e350-390a-4a2c-86c3-8e768404cc45] Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:09.483658 #13108] FATAL -- : [3be8e350-390a-4a2c-86c3-8e768404cc45]   
+F, [2018-04-25T01:37:09.483704 #13108] FATAL -- : [3be8e350-390a-4a2c-86c3-8e768404cc45] ActionView::MissingTemplate (Missing template friends/show, application/show with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:09.483741 #13108] FATAL -- : [3be8e350-390a-4a2c-86c3-8e768404cc45]   
+F, [2018-04-25T01:37:09.483778 #13108] FATAL -- : [3be8e350-390a-4a2c-86c3-8e768404cc45] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:09.648086 #13106]  INFO -- : [113c011d-33b4-4915-9f63-17d8f6be3f30] Started GET "/friends/test?order=name+asc" for 127.0.0.1 at 2018-04-25 01:37:09 +0000
+I, [2018-04-25T01:37:09.648841 #13106]  INFO -- : [113c011d-33b4-4915-9f63-17d8f6be3f30] Processing by FriendsController#show as */*
+I, [2018-04-25T01:37:09.648894 #13106]  INFO -- : [113c011d-33b4-4915-9f63-17d8f6be3f30]   Parameters: {"order"=>"name asc", "id"=>"test"}
+I, [2018-04-25T01:37:09.649842 #13106]  INFO -- : [113c011d-33b4-4915-9f63-17d8f6be3f30] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:09.650621 #13106] FATAL -- : [113c011d-33b4-4915-9f63-17d8f6be3f30]   
+F, [2018-04-25T01:37:09.650676 #13106] FATAL -- : [113c011d-33b4-4915-9f63-17d8f6be3f30] ActionView::MissingTemplate (Missing template friends/show, application/show with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:09.650729 #13106] FATAL -- : [113c011d-33b4-4915-9f63-17d8f6be3f30]   
+F, [2018-04-25T01:37:09.650767 #13106] FATAL -- : [113c011d-33b4-4915-9f63-17d8f6be3f30] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:09.808190 #13108]  INFO -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba] Started GET "/friends/test?order=name+asc" for 127.0.0.1 at 2018-04-25 01:37:09 +0000
+I, [2018-04-25T01:37:09.808831 #13108]  INFO -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba] Processing by FriendsController#show as */*
+I, [2018-04-25T01:37:09.808889 #13108]  INFO -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba]   Parameters: {"order"=>"name asc", "id"=>"test"}
+I, [2018-04-25T01:37:09.809690 #13108]  INFO -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:09.810286 #13108] FATAL -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba]   
+F, [2018-04-25T01:37:09.810336 #13108] FATAL -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba] ActionView::MissingTemplate (Missing template friends/show, application/show with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:09.810385 #13108] FATAL -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba]   
+F, [2018-04-25T01:37:09.810425 #13108] FATAL -- : [3e0770c2-5c34-4b40-ba78-24aaf0960cba] app/controllers/application_controller.rb:42:in `authenticate_user!'
+E, [2018-04-25T01:37:11.487343 #13108] ERROR -- : WebSocket error occurred: Broken pipe
+I, [2018-04-25T01:37:11.487742 #13108]  INFO -- : Finished "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:11 +0000
+I, [2018-04-25T01:37:11.487860 #13108]  INFO -- : ChatChannel stopped streaming from notification_channel_5
+I, [2018-04-25T01:37:11.806755 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:37:11 +0000
+I, [2018-04-25T01:37:11.807473 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:11.807527 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:37:11.808372 #13106] DEBUG -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:37:11.808902 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09]   Rendering text template
+I, [2018-04-25T01:37:11.808978 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:11.809083 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09] Sent data  (0.5ms)
+I, [2018-04-25T01:37:11.809196 #13106]  INFO -- : [ccb7a92f-a4d7-49f9-ab46-75a00e6ecc09] Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:11.810199 #13108]  INFO -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:11 +0000
+I, [2018-04-25T01:37:11.810752 #13108]  INFO -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:11.811510 #13108]  INFO -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:11.812068 #13108] FATAL -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6]   
+F, [2018-04-25T01:37:11.812112 #13108] FATAL -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:11.812149 #13108] FATAL -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6]   
+F, [2018-04-25T01:37:11.812185 #13108] FATAL -- : [8f7d2fb1-e4c0-4b54-aad3-66b5bea453b6] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:11.812711 #13108]  INFO -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:11 +0000
+I, [2018-04-25T01:37:11.813088 #13108]  INFO -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:11.813766 #13108]  INFO -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:11.814500 #13108] FATAL -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1]   
+F, [2018-04-25T01:37:11.814545 #13108] FATAL -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:11.814600 #13108] FATAL -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1]   
+F, [2018-04-25T01:37:11.814637 #13108] FATAL -- : [7b9317bd-876e-46f3-a8a3-24961ff044b1] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:11.847604 #13106]  INFO -- : [b0e18843-b338-4bf5-a8d3-d88c2d14785b] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:37:11 +0000
+I, [2018-04-25T01:37:11.847985 #13106]  INFO -- : [b0e18843-b338-4bf5-a8d3-d88c2d14785b] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:11 +0000
+I, [2018-04-25T01:37:11.848046 #13106]  INFO -- : [b0e18843-b338-4bf5-a8d3-d88c2d14785b] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:37:11.988415 #13106]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:37:11.988692 #13106]  INFO -- : ChatChannel is streaming from notification_channel_5
+E, [2018-04-25T01:37:12.087279 #13106] ERROR -- : WebSocket error occurred: Broken pipe
+I, [2018-04-25T01:37:12.087628 #13106]  INFO -- : Finished "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.087739 #13106]  INFO -- : ChatChannel stopped streaming from notification_channel_5
+I, [2018-04-25T01:37:12.278609 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.279238 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:12.279287 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:37:12.280010 #13108] DEBUG -- : [8b730ee3-fc50-4637-9a61-78e6511165c2]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:37:12.280592 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2]   Rendering text template
+I, [2018-04-25T01:37:12.280670 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:12.280760 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2] Sent data  (0.5ms)
+I, [2018-04-25T01:37:12.280858 #13108]  INFO -- : [8b730ee3-fc50-4637-9a61-78e6511165c2] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:12.282050 #13106]  INFO -- : [e06fd3f7-6743-40bd-9a56-df319182400f] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.282748 #13106]  INFO -- : [e06fd3f7-6743-40bd-9a56-df319182400f] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:12.283645 #13106]  INFO -- : [e06fd3f7-6743-40bd-9a56-df319182400f] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.284211 #13106] FATAL -- : [e06fd3f7-6743-40bd-9a56-df319182400f]   
+F, [2018-04-25T01:37:12.284256 #13106] FATAL -- : [e06fd3f7-6743-40bd-9a56-df319182400f] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.284304 #13106] FATAL -- : [e06fd3f7-6743-40bd-9a56-df319182400f]   
+F, [2018-04-25T01:37:12.284337 #13106] FATAL -- : [e06fd3f7-6743-40bd-9a56-df319182400f] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.284879 #13106]  INFO -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.285289 #13106]  INFO -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:12.286067 #13106]  INFO -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.286781 #13106] FATAL -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef]   
+F, [2018-04-25T01:37:12.286839 #13106] FATAL -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.286879 #13106] FATAL -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef]   
+F, [2018-04-25T01:37:12.286913 #13106] FATAL -- : [f283b2cf-6578-4709-b0b5-00becf2e88ef] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.325748 #13108]  INFO -- : [78311c22-8820-4875-946f-43cdfceb18d0] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.326101 #13108]  INFO -- : [78311c22-8820-4875-946f-43cdfceb18d0] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.326194 #13108]  INFO -- : [78311c22-8820-4875-946f-43cdfceb18d0] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+E, [2018-04-25T01:37:12.437703 #13108] ERROR -- : WebSocket error occurred: Broken pipe
+E, [2018-04-25T01:37:12.437982 #13108] ERROR -- : Ignoring message processed after the WebSocket was closed: "{\"command\":\"subscribe\",\"identifier\":\"{\\\"channel\\\":\\\"ChatChannel\\\",\\\"channel_id\\\":\\\"Yx1aY2EEZUBuXARtCQQGBWIGWWBoAQ==\\\"}\"}")
+I, [2018-04-25T01:37:12.438251 #13108]  INFO -- : Finished "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.578198 #13106]  INFO -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.578768 #13106]  INFO -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:12.579623 #13106]  INFO -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.580210 #13106] FATAL -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d]   
+F, [2018-04-25T01:37:12.580258 #13106] FATAL -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.580294 #13106] FATAL -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d]   
+F, [2018-04-25T01:37:12.580330 #13106] FATAL -- : [057b322a-8420-4c6b-8c82-7154c3b0a35d] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.580843 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.581417 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:12.581466 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:37:12.582199 #13108] DEBUG -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:37:12.582752 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a]   Rendering text template
+I, [2018-04-25T01:37:12.582852 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:12.582942 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a] Sent data  (0.4ms)
+I, [2018-04-25T01:37:12.583035 #13108]  INFO -- : [08d03c8f-d190-40c9-bf22-d25ff2394a3a] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:12.597627 #13108]  INFO -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.598030 #13108]  INFO -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:12.598758 #13108]  INFO -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.599341 #13108] FATAL -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0]   
+F, [2018-04-25T01:37:12.599384 #13108] FATAL -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.599417 #13108] FATAL -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0]   
+F, [2018-04-25T01:37:12.599455 #13108] FATAL -- : [4e2439b4-6427-4b2f-b14e-ae78ee3860d0] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.758002 #13106]  INFO -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.758638 #13106]  INFO -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:12.759543 #13106]  INFO -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.760194 #13106] FATAL -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65]   
+F, [2018-04-25T01:37:12.760241 #13106] FATAL -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.760278 #13106] FATAL -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65]   
+F, [2018-04-25T01:37:12.760314 #13106] FATAL -- : [e6d7107f-1df4-4e40-84cb-cef417b01e65] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.948584 #13108]  INFO -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.949224 #13108]  INFO -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:12.950519 #13106]  INFO -- : [24142495-ccfc-48f1-b14a-0a3c84889e91] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.951128 #13106]  INFO -- : [24142495-ccfc-48f1-b14a-0a3c84889e91] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:12.952003 #13106]  INFO -- : [24142495-ccfc-48f1-b14a-0a3c84889e91] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.952594 #13106] FATAL -- : [24142495-ccfc-48f1-b14a-0a3c84889e91]   
+F, [2018-04-25T01:37:12.952640 #13106] FATAL -- : [24142495-ccfc-48f1-b14a-0a3c84889e91] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.952687 #13106] FATAL -- : [24142495-ccfc-48f1-b14a-0a3c84889e91]   
+F, [2018-04-25T01:37:12.952726 #13106] FATAL -- : [24142495-ccfc-48f1-b14a-0a3c84889e91] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.953026 #13108]  INFO -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:12.953590 #13108] FATAL -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c]   
+F, [2018-04-25T01:37:12.953632 #13108] FATAL -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:12.953666 #13108] FATAL -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c]   
+F, [2018-04-25T01:37:12.953707 #13108] FATAL -- : [ac1d1ca4-34e5-4b0f-93a2-3998bf630c7c] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:12.954297 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.954728 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:12.954778 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:37:12.955450 #13108] DEBUG -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:37:12.955922 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd]   Rendering text template
+I, [2018-04-25T01:37:12.956004 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:12.956098 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd] Sent data  (0.4ms)
+I, [2018-04-25T01:37:12.956196 #13108]  INFO -- : [5c95f0a3-b152-448a-a0bb-bb10fa50eacd] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:12.976594 #13106]  INFO -- : [3b9809ce-005b-4411-841f-ffd023e608a4] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.976993 #13106]  INFO -- : [3b9809ce-005b-4411-841f-ffd023e608a4] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:12 +0000
+I, [2018-04-25T01:37:12.977059 #13106]  INFO -- : [3b9809ce-005b-4411-841f-ffd023e608a4] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+E, [2018-04-25T01:37:13.067659 #13106] ERROR -- : WebSocket error occurred: Broken pipe
+I, [2018-04-25T01:37:13.067933 #13106]  INFO -- : Finished "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.237888 #13106]  INFO -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.238519 #13106]  INFO -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:13.239458 #13106]  INFO -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:13.240028 #13106] FATAL -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c]   
+F, [2018-04-25T01:37:13.240107 #13106] FATAL -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:13.240172 #13106] FATAL -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c]   
+F, [2018-04-25T01:37:13.240211 #13106] FATAL -- : [8fde8bca-950b-4134-ba1d-e57e382bac1c] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:13.246119 #13108]  INFO -- : [d37b609b-2053-4758-85dd-a1e8bb73708f] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.246659 #13108]  INFO -- : [d37b609b-2053-4758-85dd-a1e8bb73708f] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:13.247459 #13108]  INFO -- : [d37b609b-2053-4758-85dd-a1e8bb73708f] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:13.248017 #13108] FATAL -- : [d37b609b-2053-4758-85dd-a1e8bb73708f]   
+F, [2018-04-25T01:37:13.248059 #13108] FATAL -- : [d37b609b-2053-4758-85dd-a1e8bb73708f] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:13.248096 #13108] FATAL -- : [d37b609b-2053-4758-85dd-a1e8bb73708f]   
+F, [2018-04-25T01:37:13.248131 #13108] FATAL -- : [d37b609b-2053-4758-85dd-a1e8bb73708f] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:13.248519 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.248969 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:13.249020 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:37:13.249755 #13106] DEBUG -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:37:13.250459 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03]   Rendering text template
+I, [2018-04-25T01:37:13.250561 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:13.250668 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03] Sent data  (0.7ms)
+I, [2018-04-25T01:37:13.250757 #13106]  INFO -- : [9193bc61-ad6d-42b0-9f2d-a71ced12de03] Completed 200 OK in 2ms (Views: 0.6ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:13.446632 #13108]  INFO -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.447222 #13108]  INFO -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:13.448143 #13108]  INFO -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:13.448727 #13108] FATAL -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb]   
+F, [2018-04-25T01:37:13.448774 #13108] FATAL -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:13.448813 #13108] FATAL -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb]   
+F, [2018-04-25T01:37:13.448857 #13108] FATAL -- : [ae49d42d-611f-4831-bdbf-94df95eb7fcb] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:13.449610 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60] Started GET "/users/5/icon" for 127.0.0.1 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.450569 #13108]  INFO -- : [1ab6a59d-b67c-48a2-aabb-724305a00a29] Started GET "/cable" for 126.35.144.247 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.450916 #13108]  INFO -- : [1ab6a59d-b67c-48a2-aabb-724305a00a29] Started GET "/cable/" [WebSocket] for 126.35.144.247 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.450978 #13108]  INFO -- : [1ab6a59d-b67c-48a2-aabb-724305a00a29] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:37:13.451147 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:13.451195 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60]   Parameters: {"id"=>"5"}
+D, [2018-04-25T01:37:13.451984 #13106] DEBUG -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+I, [2018-04-25T01:37:13.452403 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60]   Rendering text template
+I, [2018-04-25T01:37:13.452652 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:13.452741 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60] Sent data  (0.5ms)
+I, [2018-04-25T01:37:13.452834 #13106]  INFO -- : [9b9e1039-8af9-4b2b-9640-78a19a776a60] Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:13.454640 #13108]  INFO -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:13 +0000
+I, [2018-04-25T01:37:13.454998 #13108]  INFO -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:13.455627 #13108]  INFO -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:13.456158 #13108] FATAL -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa]   
+F, [2018-04-25T01:37:13.456200 #13108] FATAL -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:13.456234 #13108] FATAL -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa]   
+F, [2018-04-25T01:37:13.456272 #13108] FATAL -- : [7ef1f8a0-2792-41e7-99da-32375ac09cfa] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:13.535690 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:37:13.535919 #13108]  INFO -- : ChatChannel is streaming from notification_channel_5
+E, [2018-04-25T01:37:48.763693 #13106] ERROR -- : WebSocket error occurred: Broken pipe
+I, [2018-04-25T01:37:48.764075 #13106]  INFO -- : Finished "/cable/" [WebSocket] for 1.72.0.105 at 2018-04-25 01:37:48 +0000
+I, [2018-04-25T01:37:48.764175 #13106]  INFO -- : ChatChannel stopped streaming from notification_channel_4
+I, [2018-04-25T01:37:48.964136 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a] Started GET "/users/4/icon" for 127.0.0.1 at 2018-04-25 01:37:48 +0000
+I, [2018-04-25T01:37:48.964760 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a] Processing by UsersController#icon as HTML
+I, [2018-04-25T01:37:48.964815 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a]   Parameters: {"id"=>"4"}
+D, [2018-04-25T01:37:48.965580 #13108] DEBUG -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+I, [2018-04-25T01:37:48.966128 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a]   Rendering text template
+I, [2018-04-25T01:37:48.966246 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a]   Rendered text template (0.0ms)
+I, [2018-04-25T01:37:48.966345 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a] Sent data  (0.5ms)
+I, [2018-04-25T01:37:48.966485 #13108]  INFO -- : [8be6f7ce-107d-4c10-bca9-1833c709c54a] Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+I, [2018-04-25T01:37:48.976128 #13106]  INFO -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46] Started GET "/friends" for 127.0.0.1 at 2018-04-25 01:37:48 +0000
+I, [2018-04-25T01:37:48.976695 #13106]  INFO -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46] Processing by FriendsController#index as */*
+I, [2018-04-25T01:37:48.977647 #13106]  INFO -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:48.978274 #13106] FATAL -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46]   
+F, [2018-04-25T01:37:48.978322 #13106] FATAL -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46] ActionView::MissingTemplate (Missing template friends/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:48.978359 #13106] FATAL -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46]   
+F, [2018-04-25T01:37:48.978395 #13106] FATAL -- : [97a78ea0-f295-4dd5-aea2-bfae3e104a46] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:48.979060 #13106]  INFO -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf] Started GET "/feeds" for 127.0.0.1 at 2018-04-25 01:37:48 +0000
+I, [2018-04-25T01:37:48.979425 #13106]  INFO -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf] Processing by FeedsController#index as */*
+I, [2018-04-25T01:37:48.980156 #13106]  INFO -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+F, [2018-04-25T01:37:48.980775 #13106] FATAL -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf]   
+F, [2018-04-25T01:37:48.980820 #13106] FATAL -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf] ActionView::MissingTemplate (Missing template feeds/index, application/index with {:locale=>[:ja], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :slim, :jbuilder]}. Searched in:
+  * "/var/www/app/sns/app/views"
+):
+F, [2018-04-25T01:37:48.980857 #13106] FATAL -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf]   
+F, [2018-04-25T01:37:48.980941 #13106] FATAL -- : [448bca16-9c39-401b-9e92-fa2c36c38cbf] app/controllers/application_controller.rb:42:in `authenticate_user!'
+I, [2018-04-25T01:37:49.026814 #13108]  INFO -- : [33da5096-425e-4c33-8031-9c6fcd81468c] Started GET "/cable" for 1.72.0.105 at 2018-04-25 01:37:49 +0000
+I, [2018-04-25T01:37:49.027175 #13108]  INFO -- : [33da5096-425e-4c33-8031-9c6fcd81468c] Started GET "/cable/" [WebSocket] for 1.72.0.105 at 2018-04-25 01:37:49 +0000
+I, [2018-04-25T01:37:49.027240 #13108]  INFO -- : [33da5096-425e-4c33-8031-9c6fcd81468c] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:37:49.164172 #13106]  INFO -- : [b71e6102-4c32-43ec-ae7f-58aad8d3ab77] Started GET "/css/ext/bootstrap.min.css.map" for 127.0.0.1 at 2018-04-25 01:37:49 +0000
+F, [2018-04-25T01:37:49.165319 #13106] FATAL -- : [b71e6102-4c32-43ec-ae7f-58aad8d3ab77]   
+F, [2018-04-25T01:37:49.165369 #13106] FATAL -- : [b71e6102-4c32-43ec-ae7f-58aad8d3ab77] ActionController::RoutingError (No route matches [GET] "/css/ext/bootstrap.min.css.map"):
+F, [2018-04-25T01:37:49.165419 #13106] FATAL -- : [b71e6102-4c32-43ec-ae7f-58aad8d3ab77]   
+F, [2018-04-25T01:37:49.165463 #13106] FATAL -- : [b71e6102-4c32-43ec-ae7f-58aad8d3ab77] actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] railties (5.1.4) lib/rails/engine.rb:522:in `call'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] unicorn (5.4.0) lib/unicorn/http_server.rb:606:in `process_client'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] unicorn (5.4.0) lib/unicorn/http_server.rb:701:in `worker_loop'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] unicorn (5.4.0) lib/unicorn/http_server.rb:549:in `spawn_missing_workers'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] unicorn (5.4.0) lib/unicorn/http_server.rb:142:in `start'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] unicorn (5.4.0) bin/unicorn_rails:209:in `<top (required)>'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] /usr/local/bin/unicorn_rails:23:in `load'
+[b71e6102-4c32-43ec-ae7f-58aad8d3ab77] /usr/local/bin/unicorn_rails:23:in `<main>'
+I, [2018-04-25T01:37:49.203962 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:37:49.204208 #13108]  INFO -- : ChatChannel is streaming from notification_channel_5
+I, [2018-04-25T01:37:49.864142 #13108]  INFO -- : [ad59b648-0248-4c38-b179-6edc2414e4b9] Started GET "/css/ext/bootstrap.min.css.map" for 127.0.0.1 at 2018-04-25 01:37:49 +0000
+F, [2018-04-25T01:37:49.865170 #13108] FATAL -- : [ad59b648-0248-4c38-b179-6edc2414e4b9]   
+F, [2018-04-25T01:37:49.865221 #13108] FATAL -- : [ad59b648-0248-4c38-b179-6edc2414e4b9] ActionController::RoutingError (No route matches [GET] "/css/ext/bootstrap.min.css.map"):
+F, [2018-04-25T01:37:49.865256 #13108] FATAL -- : [ad59b648-0248-4c38-b179-6edc2414e4b9]   
+F, [2018-04-25T01:37:49.865313 #13108] FATAL -- : [ad59b648-0248-4c38-b179-6edc2414e4b9] actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] railties (5.1.4) lib/rails/engine.rb:522:in `call'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] unicorn (5.4.0) lib/unicorn/http_server.rb:606:in `process_client'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] unicorn (5.4.0) lib/unicorn/http_server.rb:701:in `worker_loop'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] unicorn (5.4.0) lib/unicorn/http_server.rb:549:in `spawn_missing_workers'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] unicorn (5.4.0) lib/unicorn/http_server.rb:142:in `start'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] unicorn (5.4.0) bin/unicorn_rails:209:in `<top (required)>'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] /usr/local/bin/unicorn_rails:23:in `load'
+[ad59b648-0248-4c38-b179-6edc2414e4b9] /usr/local/bin/unicorn_rails:23:in `<main>'
+I, [2018-04-25T01:37:55.787144 #13108]  INFO -- : Finished "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:37:55 +0000
+I, [2018-04-25T01:37:55.787293 #13108]  INFO -- : ChatChannel stopped streaming from notification_channel_2
+I, [2018-04-25T01:37:56.787075 #13108]  INFO -- : [b31cb7c4-0e1d-456e-8aa0-c75badb9487b] Started GET "/cable" for 106.154.77.237 at 2018-04-25 01:37:56 +0000
+I, [2018-04-25T01:37:56.787512 #13108]  INFO -- : [b31cb7c4-0e1d-456e-8aa0-c75badb9487b] Started GET "/cable/" [WebSocket] for 106.154.77.237 at 2018-04-25 01:37:56 +0000
+I, [2018-04-25T01:37:56.787581 #13108]  INFO -- : [b31cb7c4-0e1d-456e-8aa0-c75badb9487b] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+I, [2018-04-25T01:37:56.907290 #13108]  INFO -- : ChatChannel is transmitting the subscription confirmation
+I, [2018-04-25T01:37:56.907595 #13108]  INFO -- : ChatChannel is streaming from notification_channel_2

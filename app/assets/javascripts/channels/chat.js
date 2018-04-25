@@ -88,7 +88,7 @@ function createCommentBaloon(room_id,data) {
     console.log("test")
     var url = message.replace(regex,"$1");
     var splitted_mess = message.split(url);
-    message = splitted_mess.join("<a href='"+url+"' target='blank'>"+url+"</a>")
+    message = splitted_mess.join("<a href='"X+ ${escape_html(url)} +"' target='blank'>"+url+"</a>")
   }
   
   if(my_id == data['message']['user_id']) {

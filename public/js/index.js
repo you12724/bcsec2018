@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $$('div-results-search-friend').innerHTML = '';
         for (var counter in result.friends) {
           var value = result.friends[counter];
-          $$('div-results-search-friend').innerHTML += `<div class="user-search-result"><img src="/users/${value.id}/icon"> ${value.name} <form class="form-search-add-user"><input type="hidden" name="login_id" value="${value.login_id}"><input type="submit" class="btn btn-primary" value="追加"></form></div>`;
+          $$('div-results-search-friend').innerHTML += `<div class="user-search-result"><img src="/users/${value.id}/icon"> ${escape_html(value.name)} <form class="form-search-add-user"><input type="hidden" name="login_id" value="${value.login_id}"><input type="submit" class="btn btn-primary" value="追加"></form></div>`;
         }
 
         var forms = document.getElementsByClassName("form-search-add-user");

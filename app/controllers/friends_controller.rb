@@ -21,7 +21,7 @@ class FriendsController < ApplicationController
     # 友達検索
     order = "id DESC"
     order = params[:order] if params[:order]
-    friends = User.where("name LIKE '%?%'", params[:id]).order(order)
+    friends = User.where("name LIKE ?", "%#{params[:id]}%").order(order)
     render json: {friends: friends.map { |friend| {login_id: friend[:login_id], name: friend[:name]} }} and return
   end
 end

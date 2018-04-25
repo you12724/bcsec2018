@@ -1,3 +1,13 @@
+## 手元での動かし方
+```
+brew install imagemagick@6
+brew link --force imagemagick@6
+bundle install --path .bundle
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rails s
+```
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.

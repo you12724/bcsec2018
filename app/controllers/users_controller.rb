@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     stat = User.create params.permit(:login_id, :name, :pass, :icon_file_name)
     render json: {errors: stat.errors.full_messages}, status: :bad_request and return if stat.errors.any?
 
-    user = User.find_by 'login_id = ?', params[:login_id]
+    user = User.find_by log_in: params[:log_in]
     icon_file_path = "#{Rails.root}/public/icons/#{user[:icon_file_name]}"
     user.update icon_file_name: default_icon_path unless File.file? icon_file_path
 

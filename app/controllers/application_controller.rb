@@ -21,12 +21,22 @@ class ApplicationController < ActionController::API
   end
 
   def reject_cross_origin_request
-    print "HOGEHOGEHOGE?"
     render :nothing => true, :status => :bad_request and return unless request.headers['X-Requested-With']
   end
 
   def authenticate_user!
-    @current_user = User.find_by(id: session[:id])
+    if request.headers['Authorization']
+      begin
+        authenticate_with_http_token do |token, options|
+          payload = JWT.decode token, Rails.application.secrets.secret_key_base, false
+          @current_user = User.find_by(id: payload[0]['id'])
+        end
+      rescue
+        render :nothing => true, :status => :forbidden and return
+      end
+    else
+      @current_user = User.find_by(id: session[:id])
+    end
     render :nothing => true, :status => :forbidden and return if @current_user.nil?
   end
 end

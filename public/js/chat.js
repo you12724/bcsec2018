@@ -42,14 +42,12 @@ function startChat(friend_id,received){
       //接続確認処理
       if(my_id != data['message']['user_id']){
         if (type == "pong"){
-          console.log("Received pong:"+room_id);
           connectionTimerClear(room_id);
           changeChatInputStatus(room_id, false);
           return;
         }
         createChatWindow(room_id, friend_id); //ChatWindowがなければ作る
         changeChatInputStatus(room_id, false);
-        console.log("Send pong");
         //接続がうまく言っていない時にオブジェクトがなくなる？要確認。
         chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});        
       }
@@ -210,17 +208,14 @@ function subscribeNotificationChannel(id) {
     {"channel":"ChatChannel","channel_id":createChannelId(my_id,0)}, {
     connected: function() {
       // Called when the subscription is ready for use on the server
-      console.log("Subscribe notification channel:"+my_id);
     },
 
     disconnected: function() {
       // Called when the subscription has been terminated by the server
-      console.log("Disconnected from notification channel:"+my_id);
     },
 
     received: function(data) {
       var friend_id = data['friend_id'];
-      console.log("Notified from "+friend_id);      
       var room_id = my_id<friend_id?my_id+"-"+friend_id:friend_id+"-"+my_id;
       if(chatroom_list[room_id] != undefined) {
         changeChatInputStatus(room_id, false);

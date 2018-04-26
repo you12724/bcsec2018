@@ -1,9 +1,11 @@
 require "base64"
 class ChatChannel < ApplicationCable::Channel
+
   def subscribed
     # xorで暗号化されたchannel_idを復号する
+    # 時間がないので基本は元のまま
     channel_id = xorString(Base64.decode64(params[:channel_id].to_s)).split(":")
-    my_id = channel_id[1].to_s
+    my_id = current_user.id.to_s
     friend_id = channel_id[2].to_s
     if friend_id.to_i > 0 then
       room_id = my_id.to_i < friend_id.to_i ? my_id+"-"+friend_id : friend_id+"-"+my_id
@@ -20,7 +22,10 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    ActionCable.server.broadcast('chat_channel_'+data["message"]["room_id"].to_s, data)
+    friend_id = data["message"]["friend_id"]
+    my_id = current_user.id.to_s
+    room_id = my_id.to_i < friend_id.to_i ? my_id+"-"+friend_id : friend_id+"-"+my_id
+    ActionCable.server.broadcast("chat_channel_#{room_id}", data)
   end
 
   def xorString(input_bytes)

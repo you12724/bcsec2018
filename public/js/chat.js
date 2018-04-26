@@ -18,7 +18,7 @@ function startChat(friend_id,received){
   createChatWindow(room_id, friend_id);
 
   if(received) {
-    changeChatInputStatus(room_id, false);    
+    changeChatInputStatus(room_id, false);
   }
 
   if(chatroom_list[room_id] != undefined) {
@@ -49,13 +49,13 @@ function startChat(friend_id,received){
         createChatWindow(room_id, friend_id); //ChatWindowがなければ作る
         changeChatInputStatus(room_id, false);
         //接続がうまく言っていない時にオブジェクトがなくなる？要確認。
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});        
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
       }
       if (type == "pong"){
         return;
-      }        
+      }
       createCommentBaloon(room_id,data);
-      return;    
+      return;
     },
 
     post: function(message) {
@@ -65,7 +65,7 @@ function startChat(friend_id,received){
 
   // 相手のNotificationの応答を確認する
   connectionTimer(room_id, "接続できませんでした。相手がオフラインの可能性があります。");
-  
+
   // Enter押したら投稿されるようにする
   $(document).on('keypress', '[data-behavior~=chat_post-'+room_id+']', function(event) {
     if (event.keyCode === 13) {
@@ -73,7 +73,7 @@ function startChat(friend_id,received){
       if(chatInput.val()=="") return false;
       //TODO 接続が完全に切れると（PCスリープ）、ここでエラーになってた。disconnect処理で灰色にしてないところがあるはず。
       try{
-        chatroom_list[room_id].post({"message":chatInput.val(),"user_id":my_id,"room_id":room_id,"type":"post"});
+        chatroom_list[room_id].post({"message":chatInput.val(),"user_id":my_id,"room_id":room_id,"type":"post", "friend_id": friend_id});
         chatInput.val('');
         connectionTimer(room_id, "接続できませんでした。相手がオフラインのため、メッセージが届いていない可能性があります。<br><button onclick='startChat("+friend_id+",false);this.parentNode.removeChild(this);'>再接続</button>");
       } catch (e){
@@ -85,7 +85,7 @@ function startChat(friend_id,received){
     }
   });
   if(received) {
-    chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+    chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
   }
 }
 
@@ -101,7 +101,7 @@ function createCommentBaloon(room_id,data) {
     message = splitted_mess.join("<a href='"+ escape_html(url) +"' target='blank'>"+escape_html(url)+"</a>")
 
   }
-  
+
   if(my_id == data['message']['user_id']) {
     //自分のコメント
     var comment_right = $("<div>", {class: 'comment-right'});
@@ -138,7 +138,7 @@ function createChatWindow(room_id, friend_id){
     return;
   }
 
-  var title = name;  
+  var title = name;
   // Templateからチャットウィンドウを作成。文字列置換の方が簡単な気が。
   var clone = document.importNode($('#chat-template')[0].content, true);
   clone.getElementById("chatroom-container").id="chatroom-container-"+room_id;
@@ -148,7 +148,7 @@ function createChatWindow(room_id, friend_id){
   clone.getElementById("chat-input").id="chat-input-"+room_id;
   clone.getElementById("chatroom-title").id="chatroom-title-"+room_id;
   clone.getElementById("chatroom-close-button").id="chatroom-close-button-"+room_id;
-  
+
   $('#chat-container').append(clone);
   $("#chatroom-title-"+room_id).text(title);
   $("#chatroom-title-"+room_id)[0].room_id = room_id;
@@ -164,7 +164,7 @@ function createChatWindow(room_id, friend_id){
       $("#chatroom-container-"+this.room_id)[0].style.marginTop="334px";
     }
   });
-  $("#chatroom-close-button-"+room_id)[0].room_id = room_id;    
+  $("#chatroom-close-button-"+room_id)[0].room_id = room_id;
   $("#chatroom-close-button-"+room_id).on("click", function(){
     closeChat(this.room_id);
   });
@@ -220,16 +220,16 @@ function subscribeNotificationChannel(id) {
       var room_id = my_id<friend_id?my_id+"-"+friend_id:friend_id+"-"+my_id;
       if(chatroom_list[room_id] != undefined) {
         changeChatInputStatus(room_id, false);
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
         return;
       }
       if(chatroom_list[room_id] != undefined) {
         console.log("Resume chat by friend's start chat.");
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
       }else{
         console.log("Requested new chat.");
       }
-      startChat(friend_id,true);  
+      startChat(friend_id,true);
     },
 
     post: function(message) {

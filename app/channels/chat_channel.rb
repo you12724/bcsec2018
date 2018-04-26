@@ -22,7 +22,10 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def post(data)
-    ActionCable.server.broadcast('chat_channel_'+data["message"]["room_id"].to_s, data)
+    friend_id = data["message"]["friend_id"]
+    my_id = current_user.id.to_s
+    room_id = my_id.to_i < friend_id.to_i ? my_id+"-"+friend_id : friend_id+"-"+my_id
+    ActionCable.server.broadcast("chat_channel_#{room_id}", data)
   end
 
   def xorString(input_bytes)

@@ -18,7 +18,7 @@ function startChat(friend_id,received){
   createChatWindow(room_id, friend_id);
 
   if(received) {
-    changeChatInputStatus(room_id, false);    
+    changeChatInputStatus(room_id, false);
   }
 
   if(chatroom_list[room_id] != undefined) {
@@ -49,13 +49,13 @@ function startChat(friend_id,received){
         createChatWindow(room_id, friend_id); //ChatWindowがなければ作る
         changeChatInputStatus(room_id, false);
         //接続がうまく言っていない時にオブジェクトがなくなる？要確認。
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});        
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});        
       }
       if (type == "pong"){
         return;
-      }        
+      }
       createCommentBaloon(room_id,data);
-      return;    
+      return;
     },
 
     post: function(message) {
@@ -65,7 +65,7 @@ function startChat(friend_id,received){
 
   // 相手のNotificationの応答を確認する
   connectionTimer(room_id, "接続できませんでした。相手がオフラインの可能性があります。");
-  
+
   // Enter押したら投稿されるようにする
   $(document).on('keypress', '[data-behavior~=chat_post-'+room_id+']', function(event) {
     if (event.keyCode === 13) {
@@ -100,7 +100,7 @@ function createCommentBaloon(room_id,data) {
     var splitted_mess = message.split(url);
     message = splitted_mess.join("<a href='"+ escape_html(url) +"' target='blank'>"+url+"</a>")
   }
-  
+
   if(my_id == data['message']['user_id']) {
     //自分のコメント
     var comment_right = $("<div>", {class: 'comment-right'});
@@ -137,7 +137,7 @@ function createChatWindow(room_id, friend_id){
     return;
   }
 
-  var title = name;  
+  var title = name;
   // Templateからチャットウィンドウを作成。文字列置換の方が簡単な気が。
   var clone = document.importNode($('#chat-template')[0].content, true);
   clone.getElementById("chatroom-container").id="chatroom-container-"+room_id;
@@ -147,7 +147,7 @@ function createChatWindow(room_id, friend_id){
   clone.getElementById("chat-input").id="chat-input-"+room_id;
   clone.getElementById("chatroom-title").id="chatroom-title-"+room_id;
   clone.getElementById("chatroom-close-button").id="chatroom-close-button-"+room_id;
-  
+
   $('#chat-container').append(clone);
   $("#chatroom-title-"+room_id).text(title);
   $("#chatroom-title-"+room_id)[0].room_id = room_id;
@@ -163,7 +163,7 @@ function createChatWindow(room_id, friend_id){
       $("#chatroom-container-"+this.room_id)[0].style.marginTop="334px";
     }
   });
-  $("#chatroom-close-button-"+room_id)[0].room_id = room_id;    
+  $("#chatroom-close-button-"+room_id)[0].room_id = room_id;
   $("#chatroom-close-button-"+room_id).on("click", function(){
     closeChat(this.room_id);
   });
@@ -228,7 +228,7 @@ function subscribeNotificationChannel(id) {
       }else{
         console.log("Requested new chat.");
       }
-      startChat(friend_id,true);  
+      startChat(friend_id,true);
     },
 
     post: function(message) {

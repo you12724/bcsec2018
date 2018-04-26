@@ -49,7 +49,7 @@ function startChat(friend_id,received){
         createChatWindow(room_id, friend_id); //ChatWindowがなければ作る
         changeChatInputStatus(room_id, false);
         //接続がうまく言っていない時にオブジェクトがなくなる？要確認。
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});        
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
       }
       if (type == "pong"){
         return;
@@ -73,7 +73,7 @@ function startChat(friend_id,received){
       if(chatInput.val()=="") return false;
       //TODO 接続が完全に切れると（PCスリープ）、ここでエラーになってた。disconnect処理で灰色にしてないところがあるはず。
       try{
-        chatroom_list[room_id].post({"message":chatInput.val(),"user_id":my_id,"room_id":room_id,"type":"post"});
+        chatroom_list[room_id].post({"message":chatInput.val(),"user_id":my_id,"room_id":room_id,"type":"post", "friend_id": friend_id});
         chatInput.val('');
         connectionTimer(room_id, "接続できませんでした。相手がオフラインのため、メッセージが届いていない可能性があります。<br><button onclick='startChat("+friend_id+",false);this.parentNode.removeChild(this);'>再接続</button>");
       } catch (e){
@@ -85,7 +85,7 @@ function startChat(friend_id,received){
     }
   });
   if(received) {
-    chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+    chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
   }
 }
 
@@ -219,12 +219,12 @@ function subscribeNotificationChannel(id) {
       var room_id = my_id<friend_id?my_id+"-"+friend_id:friend_id+"-"+my_id;
       if(chatroom_list[room_id] != undefined) {
         changeChatInputStatus(room_id, false);
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
         return;
       }
       if(chatroom_list[room_id] != undefined) {
         console.log("Resume chat by friend's start chat.");
-        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong"});
+        chatroom_list[room_id].post({"message":"","user_id":my_id,"room_id":room_id,"type":"pong", "friend_id": friend_id});
       }else{
         console.log("Requested new chat.");
       }

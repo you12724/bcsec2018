@@ -17,7 +17,9 @@ class UsersController < ApplicationController
   def icon
     begin
       user = User.find params[:id]
-      send_data File.read "#{Rails.root}/public/icons/#{user[:icon_file_name]}", disposition: 'inline'
+      icon_file_name = params[:icon_file_name]
+      icon_file_name.gsub!(/\.\.\//, '')
+      send_data File.read "#{Rails.root}/public/icons/#{icon_file_name}", disposition: 'inline'
     rescue
       send_data File.read Dir["#{Rails.root}/public/icons/presets/*"][0], disposition: 'inline'
     end
